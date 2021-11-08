@@ -1,8 +1,3 @@
-from django.views.generic.edit import CreateView 
-
-from django.contrib import messages
-from django.http import HttpResponseRedirect
-
 class MultipleCreateView(CreateView): 
     """ Talvez alterar o father para BaseCreateView e um template response mixin"""
 
@@ -25,10 +20,17 @@ class MultipleCreateView(CreateView):
 
     def form_valid(self, **forms):
         """ Implementar o save e não esquecer de colocar um self.object = form """ 
+        
+        for i, validForm in enumerate(forms.values()) : 
+            if i == 0:
+                self.object = validForm.save()
+            validForm.save()  
+        """
         form = forms['form'] 
-        self.object = form.save() 
+        form.save()
         form2 = forms['form2'] 
-        form2.save() 
+        self.object = form2.save() 
+        """
 
         """
         Fazer o messages.succes funcionar com **forms
@@ -38,9 +40,12 @@ class MultipleCreateView(CreateView):
             Pq tem q falar para a view quem é o object.
 
         """ 
+        print(self.object)
         messages.success(self.request, "This is my success message")
-        
+        print(self.get_success_url())
         return HttpResponseRedirect(self.get_success_url())
     
     def form_invalid(self,**forms):
         return self.render_to_response(self.get_context_data(**forms))
+
+
