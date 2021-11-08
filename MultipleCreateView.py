@@ -19,30 +19,11 @@ class MultipleCreateView(CreateView):
         return self.form_valid(**forms) 
 
     def form_valid(self, **forms):
-        """ Implementar o save e não esquecer de colocar um self.object = form """ 
-        
         for i, validForm in enumerate(forms.values()) : 
             if i == 0:
                 self.object = validForm.save()
             validForm.save()  
-        """
-        form = forms['form'] 
-        form.save()
-        form2 = forms['form2'] 
-        self.object = form2.save() 
-        """
-
-        """
-        Fazer o messages.succes funcionar com **forms
-
-        Tentar o -> if success_message
-        super().form_valid(**forms) #Por que quando eu uso isso funciona, mas se eu  não usar super nenhum ele da erro? 
-            Pq tem q falar para a view quem é o object.
-
-        """ 
-        print(self.object)
-        messages.success(self.request, "This is my success message")
-        print(self.get_success_url())
+  
         return HttpResponseRedirect(self.get_success_url())
     
     def form_invalid(self,**forms):
