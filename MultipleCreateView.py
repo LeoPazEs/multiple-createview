@@ -1,5 +1,4 @@
 class MultipleCreateView(CreateView): 
-    """ Talvez alterar o father para BaseCreateView e um template response mixin"""
 
     def get_context_data(self, **kwargs): 
         for key, value in self.form_class.items(): 
