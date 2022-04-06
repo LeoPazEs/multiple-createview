@@ -1,3 +1,5 @@
+from django.views.generic.edit import CreateView
+
 class MultipleCreateView(CreateView): 
 
     def get_context_data(self, **kwargs): 
