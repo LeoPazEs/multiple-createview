@@ -1,7 +1,7 @@
 
 MultipleCreateView
 ================== 
-View to use various unrelated or related forms of diferent objects. 
+View to use multiple unrelated or related forms of different objects. 
 Some mixins don't work with this view. 
 
 Usage:  
